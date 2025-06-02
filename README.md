@@ -1,0 +1,1 @@
+An in-memory ultra-fast pub-sub message broker for JVM based applications. 
