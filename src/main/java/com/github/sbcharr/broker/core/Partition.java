@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Partition extends BaseCommon {
-    private final Deque<MessageNode> messageNodes;
+    private final Deque<MessageNode> messageNodes; // A partition data structure
     private final Map<Long, MessageNode> nodeMap; // In a partition, it keeps track of message nodes by their offsets
-    private final AtomicInteger nextOffset = new AtomicInteger(-1); // Used to generate the next offset for new messages
+    private final AtomicInteger nextOffset = new AtomicInteger(0); // Used to generate the next offset for new messages
 
     public Partition() {
         this.messageNodes = new ConcurrentLinkedDeque<>();

@@ -4,27 +4,17 @@ import com.github.sbcharr.broker.api.Message;
 import com.github.sbcharr.broker.api.Topic;
 import com.github.sbcharr.util.Util;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TopicManager {
-    private static volatile TopicManager INSTANCE;
     private final Map<String, Topic> topics;
 
-    private TopicManager() {
+    TopicManager() {
         this.topics = new ConcurrentHashMap<>();
-    }
-
-    public static TopicManager getInstance() {
-        if (INSTANCE == null) {
-            synchronized (TopicManager.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new TopicManager();
-                }
-            }
-        }
-
-        return INSTANCE;
     }
 
     Topic createTopic(Topic topic) {
@@ -34,6 +24,17 @@ public class TopicManager {
         // topic name is case-insensitive. TODO: consider regex on topic name to ensure it meets certain criteria
         return topics.putIfAbsent(topic.getName().toLowerCase(), topic);
     }
+
+    @Nullable List<Topic> getAllTopics() {
+        if (topics.isEmpty()) {
+            return null; // No topics available
+        }
+
+        return new ArrayList<>(topics.values());
+
+    }
+
+    void deleteTopic() {}
 
     // TODO: delete topic
 

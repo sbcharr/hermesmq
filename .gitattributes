@@ -1,0 +1,8 @@
+# Treat all files as text, normalize CRLF→LF in the repo
+* text=auto
+
+# Ensure shell scripts stay LF on checkout
+*.sh   text eol=lf
+
+# Ensure Windows-specific files stay CRLF if you like
+*.bat  text eol=crlf
